@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List By Aritra Ghosh</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+        color: #ff6b6b;
+      }
+
+      input[type="text"] {
+        width: 70%;
+        padding: 10px;
+      }
+
+      button {
+        padding: 10px 20px;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .delete-button {
+        background-color: #ff6b6b;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>To-Do List</h1>
+      <h2>Submitted By Aritra Ghosh</h2>
+      <input type="text" id="taskInput" placeholder="Add a new task" />
+      <button id="addTaskButton">Add</button>
+      <ul id="taskList"></ul>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const taskInput = document.getElementById("taskInput");
+        const addTaskButton = document.getElementById("addTaskButton");
+        const taskList = document.getElementById("taskList");
+
+        // Add a new task
+        addTaskButton.addEventListener("click", function () {
+          const taskText = taskInput.value.trim();
+
+          if (taskText !== "") {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                        ${taskText}
+                        <button class="delete-button">Delete</button>
+                    `;
+
+            taskList.appendChild(li);
+            taskInput.value = "";
+
+            // Attach a click event listener to the delete button
+            const deleteButton = li.querySelector(".delete-button");
+            deleteButton.addEventListener("click", function () {
+              taskList.removeChild(li);
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
